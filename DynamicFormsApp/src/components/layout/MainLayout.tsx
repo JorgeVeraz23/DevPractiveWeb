@@ -20,7 +20,7 @@ const MainLayout = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  //vehiculos-card
   const drawer = (
     <div>
             <Toolbar>
@@ -34,30 +34,48 @@ const MainLayout = () => {
           </ListItemIcon>
           <ListItemText primary="Formularios" />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate('/filled-form-page')}>
+         <ListItemButton onClick={() => navigate('/vehiculos-list')}>
+          <ListItemIcon>
+            <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Vehiculos" />
+        </ListItemButton>
+        <ListItemButton onClick={() => navigate('/vehiculos-card')}>
+          <ListItemIcon>
+            <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Vehiculos Cards" />
+        </ListItemButton>
+        <ListItemButton onClick={() => navigate('/vehiculos-carousel')}>
+          <ListItemIcon>
+            <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Vehiculos Carousel" />
+        </ListItemButton>
+              {/* <ListItemButton onClick={() => navigate('/filled-form-page')}>
           <ListItemIcon>
             <CheckCircleIcon />
           </ListItemIcon>
           <ListItemText primary="Formularios Llenos" />
-        </ListItemButton>
-        <ListItemButton onClick={() => navigate('/create-form-page')}>
+        </ListItemButton> */}
+        {/* <ListItemButton onClick={() => navigate('/create-form-page')}>
           <ListItemIcon>
             <AddIcon />
           </ListItemIcon>
           <ListItemText primary="Crear Formularios" />
-        </ListItemButton>
-        <ListItemButton onClick={() => navigate('/create-form-group')}>
+        </ListItemButton> */}
+        {/* <ListItemButton onClick={() => navigate('/create-form-group')}>
           <ListItemIcon>
             <TableRowsIcon />
           </ListItemIcon>
           <ListItemText primary="Crear Grupo Formularios" />
-        </ListItemButton>
-        <ListItemButton onClick={() => navigate('/create-form-field')}>
+        </ListItemButton> */}
+        {/* <ListItemButton onClick={() => navigate('/create-form-field')}>
           <ListItemIcon>
             <TextFieldsIcon />
           </ListItemIcon>
           <ListItemText primary="Crear Campo" />
-        </ListItemButton>
+        </ListItemButton> */}
       </List>
     </div>
   );

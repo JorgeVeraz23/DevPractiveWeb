@@ -15,6 +15,11 @@ import CreateFormGroupPage from '../pages/DynamicFormPages/CreateFormGroupPage'
 import CreateFormFieldPage from '../pages/DynamicFormPages/CreateFormFieldPage'
 import FormResponsesDisplay from '../pages/DynamicFormPages/FormResponsePage'
 import FilledFormSelector from '../pages/DynamicFormPages/FilledFormSelectorPage';
+import VehiculosTable  from '../pages/VehiculosForm';
+import VehiculosCards from '../pages/DynamicFormPages/VehiculosCards';
+import VehiculosCarousel from '../pages/DynamicFormPages/VehiculosCarousel';
+import VehiculosTableXD from '../pages/VehiculosForm';
+
 
 const AppRoutes = () => {
   return (
@@ -29,6 +34,9 @@ const AppRoutes = () => {
           <Route path='create-form-page' element={<CreateFormPage/>} />
           <Route path='create-form-group' element={<CreateFormGroupPage />} />
           <Route path='create-form-field' element={<CreateFormFieldPage />} />
+          <Route path='vehiculos-list' element={<VehiculosTable />} />
+          <Route path='vehiculos-card' element={< VehiculosCards/>}></Route>
+          <Route path='vehiculos-carousel' element={< VehiculosCarousel/>}></Route>
         </Route>
       </Routes>
     </Router>

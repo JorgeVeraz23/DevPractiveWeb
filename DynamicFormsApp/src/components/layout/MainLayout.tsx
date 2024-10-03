@@ -52,6 +52,12 @@ const MainLayout = () => {
           </ListItemIcon>
           <ListItemText primary="Vehiculos Carousel" />
         </ListItemButton>
+        <ListItemButton onClick={() => navigate('/example')}>
+          <ListItemIcon>
+            <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Example" />
+        </ListItemButton>
               {/* <ListItemButton onClick={() => navigate('/filled-form-page')}>
           <ListItemIcon>
             <CheckCircleIcon />

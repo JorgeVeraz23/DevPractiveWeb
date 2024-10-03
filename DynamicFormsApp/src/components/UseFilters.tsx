@@ -30,7 +30,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
           <Button
             variant="contained"
             fullWidth
-            color={sortBy === 'name' ? 'primary' : 'default'}
+            color={sortBy === 'name' ? 'primary' : undefined} // Dejar color como 'undefined' si no es 'primary'
             onClick={() => setSortBy('name')}
           >
             Ordenar por nombre
@@ -40,7 +40,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
           <Button
             variant="contained"
             fullWidth
-            color={sortBy === 'age' ? 'primary' : 'default'}
+            color={sortBy === 'age' ? 'primary' : undefined} // Dejar color como 'undefined' si no es 'primary'
             onClick={() => setSortBy('age')}
           >
             Ordenar por edad

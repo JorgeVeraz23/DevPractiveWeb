@@ -1,32 +1,33 @@
-// components/AddUserForm.tsx
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Box, Button, TextField, Grid, Typography } from '@mui/material';
 import { UserDto } from '../data/Interface/UserInterface';
 
 interface AddUserFormProps {
-  addUser: (newUser: UserDto) => void;
+  addUser: (newUser: UserDto) => Promise<void>;
 }
 
 const AddUserForm: React.FC<AddUserFormProps> = ({ addUser }) => {
   const [newUser, setNewUser] = useState<UserDto>({ nombre: '', edad: 0 });
 
-  // Función para manejar el cambio en los inputs
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({
       ...newUser,
-      [e.target.name]: e.target.value, // Actualiza el campo de nombre o edad
+      [e.target.name]: e.target.value,
     });
   };
 
-  // Función para manejar la adición del usuario
-  const handleAddUser = () => {
+  const handleAddUser = useCallback(async () => {
     if (newUser.nombre && newUser.edad) {
-      addUser(newUser); // Enviar los datos del nuevo usuario al backend
-      setNewUser({ nombre: '', edad: 0 }); // Resetear el formulario después de agregar
+      try {
+        await addUser(newUser);
+        setNewUser({ nombre: '', edad: 0 }); // Resetear el formulario
+      } catch (error) {
+        console.error('Error al agregar usuario', error);
+      }
     } else {
-      alert("Por favor, completa todos los campos");
+      alert('Por favor, completa todos los campos');
     }
-  };
+  }, [addUser, newUser]);
 
   return (
     <Box mt={4} mb={4}>

@@ -1,19 +1,27 @@
-// hooks/useUsers.ts
-import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { useState, useEffect, useCallback } from 'react';
 import { UserDto, User } from 'data/Interface/UserInterface';
-import { Http } from '@mui/icons-material';
 
-const API_URL = 'https://localhost:7233/api/UsuarioNewExample'; // Actualiza esto con tu URL correcta
+const API_URL = 'https://localhost:7233/api/UsuarioNewExample';
+
+// Estructura del DTO de respuesta del backend
+interface MessageInfoDTO {
+  message: string;
+  detail: User | null;
+  success: boolean;
+  status: number;
+}
 
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Obtener usuarios del API
-  const fetchUsers = useCallback(async () => {
-    setLoading(true);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
     try {
       const response = await axios.get<User[]>(`${API_URL}/GetAllNewUsers`);
       setUsers(response.data);
@@ -22,37 +30,34 @@ export const useUsers = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
-  // Agregar usuario
-  const addUser = useCallback(async (newUser: UserDto) => {
+  const addUser = async (newUser: UserDto): Promise<void> => {
     try {
-        console.log("xd",newUser)
-      const response = await axios.post<User>(`${API_URL}/CreateNewUser`, newUser);
-      setUsers((prevUsers) => [...prevUsers, response.data]);
+      const response = await axios.post<MessageInfoDTO>(`${API_URL}/CreateNewUser`, newUser);
+
+      if (response.data.status === 201 && response.data.detail) {
+        // Extraer el usuario del campo "detail" en la respuesta del backend
+        const addedUser = response.data.detail;
+        // Actualizar el estado de los usuarios con el nuevo usuario
+        setUsers((prevUsers) => [...prevUsers, addedUser]);
+      } else {
+        setError('Error al agregar usuario: ' + response.data.message);
+      }
     } catch (err) {
       setError('Error al agregar usuario');
+      throw err;
     }
-  }, []);
+  };
 
-  // Eliminar usuario por ID
   const deleteUser = useCallback(async (id: number) => {
     try {
-      const response = await axios.delete(`${API_URL}/DeleteNewUser?id=${id}`);
-      if (response.status === 200) {
-        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-      }
+      await axios.delete(`${API_URL}/DeleteNewUser?id=${id}`);
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
     } catch (err) {
       setError('Error al eliminar usuario');
     }
   }, []);
 
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
-
-  return { users, loading, error, fetchUsers, addUser, deleteUser };
+  return { users, loading, error, addUser, deleteUser };
 };
-
-
-[Http]

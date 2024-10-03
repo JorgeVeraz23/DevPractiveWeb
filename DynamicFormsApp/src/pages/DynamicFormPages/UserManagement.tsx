@@ -2,9 +2,9 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { useUsers } from '../../pages/../hooks/useUsers';
 import UserList from '../../components/UserList';
-import UseFilters from '../../components/UseFilters';
+import UserFilters from '../../components/UseFilters';
 import AddUserForm from '../../components/AddUserForm';
-import { Box, Typography } from '@mui/material';
+import { UserDto } from 'data/Interface/UserInterface';
 
 const UserManagement: React.FC = () => {
   const { users, loading, error, deleteUser, addUser } = useUsers();
@@ -22,17 +22,15 @@ const UserManagement: React.FC = () => {
       );
   }, [filter, sortBy, users]);
 
-  if (loading) return <Typography>Cargando usuarios...</Typography>;
-  if (error) return <Typography color="error">{error}</Typography>;
+  if (loading) return <p>Cargando usuarios...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <Box p={4}>
-      <Typography variant="h4" gutterBottom>
-        Gestión de Usuarios
-      </Typography>
+    <div>
+      <h1>Gestión de Usuarios</h1>
 
       {/* Componente de filtros */}
-      <UseFilters
+      <UserFilters
         filter={filter}
         setFilter={setFilter}
         sortBy={sortBy}
@@ -40,11 +38,11 @@ const UserManagement: React.FC = () => {
       />
 
       {/* Formulario para agregar usuario */}
-      <AddUserForm addUser={addUser} />
+      <AddUserForm addUser={addUser} />  {/* Pasar la función addUser como prop */}
 
       {/* Lista de usuarios */}
       <UserList users={filteredAndSortedUsers} onDelete={deleteUser} />
-    </Box>
+    </div>
   );
 };
 

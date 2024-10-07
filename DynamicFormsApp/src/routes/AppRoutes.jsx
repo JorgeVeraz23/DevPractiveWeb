@@ -19,7 +19,7 @@ import FilledFormSelector from '../pages/DynamicFormPages/FilledFormSelectorPage
 import VehiculosCards from '../pages/DynamicFormPages/VehiculosCards';
 import VehiculosCarousel from '../pages/DynamicFormPages/VehiculosCarousel';
 import UserManagement from "../pages/DynamicFormPages/UserManagement.tsx"
-
+import VehiculosTable from '../pages/DynamicFormPages/VehiculosForm.jsx';
 
 const AppRoutes = () => {
   return (
@@ -36,6 +36,7 @@ const AppRoutes = () => {
           <Route path='create-form-field' element={<CreateFormFieldPage />} />
           <Route path='vehiculos-card' element={< VehiculosCards/>}></Route>
           <Route path='vehiculos-carousel' element={< VehiculosCarousel/>}></Route>
+          <Route path='vehiculos-list' element={< VehiculosTable/>}></Route>
           <Route path='example' element={<UserManagement/>}></Route>
         </Route>
       </Routes>

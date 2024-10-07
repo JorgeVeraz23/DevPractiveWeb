@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios'
+import styles from '../../styles/styles.module.css'
 
 const VehiculosTable = () => {
     
@@ -10,7 +11,7 @@ const VehiculosTable = () => {
         marca: '',
         modelo: '',
         anio: '',
-        disponible: true,
+        disponible: false,
     });
 
 
@@ -21,7 +22,7 @@ const VehiculosTable = () => {
             marca: '',
             modelo: '',
             anio: '',
-            disponible: true,
+            disponible: false,
         })
     }
 
@@ -91,12 +92,12 @@ const VehiculosTable = () => {
     }
 
     return(
-        <div>
-            <h2>Tabla de Vehiculos</h2>
-            <table>
+        <div className={styles.container}>
+            <h2 className={styles.title}>Tabla de Vehiculos</h2>
+            <table className={styles.table}> 
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th className={styles.thTd}>ID</th>
                         <th>MARCA</th>
                         <th>MODELO</th>
                         <th>ANIO</th>
@@ -156,8 +157,8 @@ const VehiculosTable = () => {
                     />
                 </label>
                 <label>
-                    <button type='submit'>{formVehiculo.idVehiculo ? 'Actualizar' : 'Crear'}</button>
-                    <button type='button' onClick={resetForm}>Cancelar</button>
+                    <button type='submit' className={styles.button}>{formVehiculo.idVehiculo ? 'Actualizar' : 'Crear'}</button>
+                    <button type='button' onClick={resetForm} className={styles.button} >Cancelar</button>
                 </label>
 
             </form>
